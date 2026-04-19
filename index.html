@@ -4,62 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ELEVEN - Accessibility Audit Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-  --top-bar-h: 72px;
+  --top-bar-h: 56px;
   --sidebar-w: 300px;
-  --critical: #ef4444;
-  --serious: #f97316;
-  --moderate: #eab308;
-  --success: #22c55e;
-  --focus-ring: #2563eb;
+  --critical: #E62214;
+  --serious: #FE620F;
+  --moderate: #868AA5;
+  --success: #25A55A;
+  --focus-ring: #3b82f6;
 }
 
 [data-theme="dark"] {
-  --bg-body: #0a0a0a;
-  --bg-sidebar: #111111;
-  --bg-card: #1a1a1a;
-  --bg-hover: #222222;
-  --bg-code: #222222;
-  --bg-topbar: #0f0f0f;
-  --border: #333333;
-  --border-subtle: #2a2a2a;
-  --text-primary: #ffffff;
-  --text-secondary: #aaaaaa;
-  --text-muted: #8a8a8a;
-  --bg-active-filter: #ffffff;
-  --text-active-filter: #000000;
-  --bg-inactive-filter: #1a1a1a;
-  --text-inactive-filter: #cccccc;
-  --sidebar-active-bg: #1a1a1a;
+  --bg-body: #080809;
+  --bg-sidebar: #0e0e10;
+  --bg-card: #131315;
+  --bg-hover: #1c1c1f;
+  --bg-code: #1c1c1f;
+  --bg-topbar: #0e0e10;
+  --border: #2a2a2f;
+  --border-subtle: #1f1f23;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a0a0ab;
+  --text-muted: #919197;
+  --bg-active-filter: #f4f4f5;
+  --text-active-filter: #0a0a0b;
+  --bg-inactive-filter: #1c1c1f;
+  --text-inactive-filter: #c0c0cc;
+  --sidebar-active-bg: #1c1c1f;
   --diff-add-bg: #132616;
   --diff-add-text: #4ade80;
   --diff-remove-bg: #2d1215;
   --diff-remove-text: #f87171;
-  --skip-overlay: rgba(10,10,10,0.6);
+  --skip-overlay: rgba(8,8,9,0.7);
 }
 
 [data-theme="light"] {
-  --bg-body: #f5f5f5;
-  --bg-sidebar: #ffffff;
+  --bg-body: #f0f0f2;
+  --bg-sidebar: #fafafa;
   --bg-card: #ffffff;
-  --bg-hover: #f0f0f0;
-  --bg-code: #eee;
+  --bg-hover: #ebebed;
+  --bg-code: #f0f0f2;
   --bg-topbar: #ffffff;
-  --border: #e0e0e0;
-  --border-subtle: #eaeaea;
-  --text-primary: #111111;
-  --text-secondary: #555555;
-  --text-muted: #737373;
-  --bg-active-filter: #111111;
+  --border: #e0e0e3;
+  --border-subtle: #ebebed;
+  --text-primary: #111113;
+  --text-secondary: #4a4a52;
+  --text-muted: #6b6b78;
+  --bg-active-filter: #111113;
   --text-active-filter: #ffffff;
-  --bg-inactive-filter: #f0f0f0;
-  --text-inactive-filter: #333333;
-  --sidebar-active-bg: #f0f0f0;
+  --bg-inactive-filter: #ebebed;
+  --text-inactive-filter: #4a4a52;
+  --sidebar-active-bg: #e6e6ea;
   --diff-add-bg: #dcfce7;
   --diff-add-text: #166534;
   --diff-remove-bg: #fee2e2;
@@ -82,11 +85,12 @@ body {
   height: var(--top-bar-h);
   background: var(--bg-topbar);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(22,24,26,0.07);
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 20px;
   z-index: 100;
-  gap: 32px;
+  gap: 16px;
 }
 .top-bar-brand {
   display: flex;
@@ -94,25 +98,26 @@ body {
   min-width: 120px;
 }
 .top-bar-brand .logo {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 .top-bar-brand .subtitle {
   font-size: 12px;
   color: var(--text-muted);
+  font-weight: 400;
 }
 .dark-mode-toggle {
   background: none;
   border: 1px solid var(--border);
   color: var(--text-secondary);
-  width: 36px; height: 36px;
-  border-radius: 8px;
+  width: 32px; height: 32px;
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 15px;
   margin-left: auto;
   transition: background 0.2s;
 }
@@ -138,9 +143,12 @@ body {
   min-width: var(--sidebar-w);
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
+  box-shadow: 2px 0 10px rgba(22,24,26,0.06);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 /* Summary filter tabs */
 .summary-filters {
@@ -151,11 +159,11 @@ body {
 }
 .filter-tab {
   flex: 1;
-  padding: 18px 16px;
+  padding: 14px 12px;
   border: none;
   background: transparent;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   text-align: center;
@@ -177,25 +185,19 @@ body {
   background: var(--bg-hover);
 }
 .filter-tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--text-primary);
+  display: none;
 }
 .filter-tab .count {
-  font-weight: 800;
-  font-size: 22px;
+  font-weight: 700;
+  font-size: 20px;
   line-height: 1.1;
   color: var(--text-primary);
   display: block;
 }
 .filter-tab .label {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
 }
 .filter-tab--failed .count { color: var(--critical); }
 .filter-tab--failed.active { color: var(--critical); }
@@ -217,21 +219,48 @@ body {
   height: 14px;
   border-radius: 50%;
   border: 1px solid var(--text-muted);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-muted);
   cursor: help;
   vertical-align: middle;
   margin-left: 2px;
   line-height: 1;
+  position: relative;
+}
+.filter-tooltip-trigger .filter-tooltip-box {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--bg-card);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 8px 10px;
+  border-radius: 6px;
+  width: 220px;
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.filter-tooltip-trigger:hover .filter-tooltip-box,
+.filter-tooltip-trigger:focus .filter-tooltip-box {
+  display: block;
 }
 
 .sidebar-title {
-  padding: 14px 14px 6px;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  padding: 12px 14px 4px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--text-muted);
 }
 .rule-groups {
@@ -239,7 +268,7 @@ body {
   overflow-y: auto;
   padding: 0 6px 10px;
 }
-.rule-groups::-webkit-scrollbar { width: 6px; }
+.rule-groups::-webkit-scrollbar { width: 5px; }
 .rule-groups::-webkit-scrollbar-track { background: transparent; }
 .rule-groups::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
@@ -251,15 +280,15 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 10px;
-  border-radius: 6px;
+  padding: 6px 8px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background 0.1s;
   user-select: none;
 }
 .pkg-tree-header:hover { background: var(--bg-hover); }
 .pkg-tree-chevron {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--text-muted);
   flex-shrink: 0;
   transition: transform 0.15s;
@@ -286,10 +315,10 @@ body {
   min-width: 0;
 }
 .pkg-tree-badge {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  min-width: 18px;
-  height: 18px;
+  min-width: 17px;
+  height: 17px;
   padding: 0 5px;
   border-radius: 9px;
   display: inline-flex;
@@ -302,8 +331,8 @@ body {
   color: #fff;
 }
 .pkg-tree-badge.pre-existing-only {
-  background: var(--bg-hover);
-  color: var(--text-muted);
+  background: var(--border);
+  color: var(--text-secondary);
 }
 .pkg-tree-badge.passed-only {
   background: rgba(34,197,94,0.12);
@@ -322,8 +351,8 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  padding: 8px 10px;
-  border-radius: 6px;
+  padding: 6px 8px;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s;
   margin-bottom: 1px;
@@ -339,7 +368,7 @@ body {
 }
 .comp-tree-item.passed-comp:hover { opacity: 0.85; }
 .comp-tree-icon {
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 2px;
   flex-shrink: 0;
   width: 14px;
@@ -368,11 +397,15 @@ body {
   align-items: center;
   gap: 8px;
   margin-top: 3px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 .comp-tree-counts .new-dot { color: var(--critical); font-weight: 600; }
 .comp-tree-counts .bl-dot { color: var(--text-muted); }
+
+/* Pre-existing filter: flip emphasis — bl-dot prominent, new-dot muted */
+[data-filter-mode="pre-existing"] .comp-tree-counts .bl-dot { color: var(--text-primary); font-weight: 600; }
+[data-filter-mode="pre-existing"] .comp-tree-counts .new-dot { color: var(--text-muted); font-weight: 400; }
 
 /* Legacy support for rule-group items (kept for backward compat) */
 .rule-group-item {
@@ -406,7 +439,7 @@ body {
   margin-bottom: 6px;
 }
 .wcag-tag {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -419,11 +452,11 @@ body {
 .category-dot.contrast { background: var(--serious); }
 .category-dot.aria { background: var(--success); }
 .category-label {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 .rule-group-pkg {
-  font-size: 11px;
+  font-size: 12px;
   font-family: var(--font-mono);
   color: var(--text-muted);
   margin-bottom: 4px;
@@ -432,7 +465,7 @@ body {
   text-overflow: ellipsis;
 }
 .rule-group-counts {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-secondary);
 }
 .rule-group-counts .issue-total { font-weight: 600; color: var(--text-secondary); }
@@ -449,7 +482,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
+  padding: 12px 20px;
+  gap: 10px;
   border-bottom: 1px solid var(--border-subtle);
 }
 .summary-status {
@@ -461,20 +495,20 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  padding: 4px 10px;
-  border-radius: 5px;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 4px;
   background: var(--critical);
   color: #fff;
   flex-shrink: 0;
 }
 .summary-badge-icon { font-size: 12px; }
 .summary-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--text-primary);
 }
 .summary-subtitle {
@@ -505,7 +539,7 @@ body {
 .summary-stat-value.critical { color: var(--critical); }
 .summary-stat-value.serious { color: var(--serious); }
 .summary-stat-label {
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: var(--text-muted);
@@ -516,9 +550,9 @@ body {
 .main-content {
   flex: 1;
   overflow-y: auto;
-  padding: 24px 32px;
+  padding: 20px 28px;
 }
-.main-content::-webkit-scrollbar { width: 8px; }
+.main-content::-webkit-scrollbar { width: 5px; }
 .main-content::-webkit-scrollbar-track { background: transparent; }
 .main-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
@@ -529,11 +563,12 @@ body {
   margin-bottom: 16px;
 }
 .main-title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 .main-count {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
   font-weight: 400;
 }
@@ -550,7 +585,7 @@ body {
 .package-filter-btn {
   width: 100%;
   font-family: var(--font-stack);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   padding: 4px 12px;
   border-radius: 20px;
@@ -572,7 +607,7 @@ body {
   border-color: var(--text-muted);
 }
 .package-filter-btn .chevron-down {
-  font-size: 8px;
+  font-size: 12px;
   transition: transform 0.15s;
 }
 .package-filter-btn.open .chevron-down {
@@ -621,7 +656,7 @@ body {
 }
 .package-dropdown-item .pkg-count {
   margin-left: auto;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   font-family: var(--font-stack);
@@ -723,7 +758,7 @@ body {
   margin-left: auto;
   font-weight: 400;
   color: var(--text-muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 /* PROGRESS BAR — removed */
@@ -732,12 +767,13 @@ body {
 .violation-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px 20px;
-  margin-bottom: 10px;
-  transition: opacity 0.3s, border-color 0.2s;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(22,24,26,0.06), 0 0 1px rgba(22,24,26,0.04);
+  transition: opacity 0.3s, border-color 0.2s, box-shadow 0.2s;
 }
-.violation-card:hover { border-color: var(--text-muted); }
+.violation-card:hover { border-color: rgba(22,24,26,0.18); box-shadow: 0 4px 14px rgba(22,24,26,0.10), 0 0 1px rgba(22,24,26,0.06); }
 .violation-card.skipped { opacity: 0.4; }
 .violation-card.resolved {
   opacity: 0.35;
@@ -774,7 +810,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
   padding: 0;
@@ -782,7 +818,7 @@ body {
 }
 .card-more-info-toggle:hover { color: var(--text-primary); }
 .card-more-info-toggle .toggle-chevron {
-  font-size: 9px;
+  font-size: 12px;
   transition: transform 0.2s;
 }
 .card-more-info-toggle.open .toggle-chevron {
@@ -804,8 +840,8 @@ body {
 /* Chevron for collapse/expand */
 .card-top-row .card-chevron {
   margin-left: auto;
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 16px;
+  color: var(--text-secondary);
   transition: transform 0.2s;
   flex-shrink: 0;
   cursor: pointer;
@@ -830,6 +866,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+  /* tightened from 10px implied */
 }
 .card-top-left {
   display: flex;
@@ -840,25 +877,27 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
+  padding: 1px 5px;
+  border-radius: 3px;
 }
-.severity-badge.critical { color: var(--critical); }
-.severity-badge.serious { color: var(--serious); }
-.severity-badge.moderate { color: var(--moderate); }
-.severity-icon { font-size: 9px; }
+.severity-badge.critical { background: transparent; color: var(--critical); border: 1px solid var(--critical); }
+.severity-badge.serious  { background: transparent; color: var(--serious);  border: 1px solid var(--serious); }
+.severity-badge.moderate { background: transparent; color: var(--moderate); border: 1px solid var(--moderate); }
+.severity-icon { font-size: 12px; }
 
 .status-tag {
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  padding: 1px 5px;
-  border-radius: 3px;
-  border: none;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
   background: var(--bg-hover);
   color: var(--text-muted);
 }
@@ -879,11 +918,12 @@ body {
 .card-rule-name {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 2px;
-  line-height: 1.3;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
 .card-wcag {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   margin-bottom: 10px;
 }
@@ -899,11 +939,11 @@ body {
   border: 1px solid var(--border-subtle);
 }
 .card-location {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 .card-html-path {
-  font-size: 11px;
+  font-size: 12px;
   font-family: var(--font-mono);
   color: var(--text-muted);
   background: var(--bg-code);
@@ -952,7 +992,7 @@ body {
   align-items: center;
   gap: 4px;
   color: var(--text-muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 .card-screenshot-placeholder-icon {
   font-size: 20px;
@@ -962,7 +1002,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 8px;
   padding-top: 10px;
   border-top: 1px solid var(--border-subtle);
 }
@@ -971,7 +1011,7 @@ body {
   align-items: center;
   gap: 5px;
   font-family: var(--font-stack);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   padding: 5px 12px;
   border-radius: 5px;
@@ -996,8 +1036,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--focus-ring);
   text-decoration: none;
 }
@@ -1035,7 +1075,7 @@ body {
 }
 .btn-fix, .btn-skip, .btn-unskip, .btn-apply, .btn-done, .btn-undo {
   font-family: var(--font-stack);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   padding: 5px 12px;
   border-radius: 5px;
@@ -1105,14 +1145,16 @@ body {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.18s;
 }
 .modal-overlay.open {
   opacity: 1;
@@ -1121,44 +1163,46 @@ body {
 .modal-box {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 28px 28px 22px;
-  width: 420px;
+  border-radius: 8px;
+  padding: 22px 22px 18px;
+  width: 400px;
   max-width: 90vw;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
 }
 .modal-title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 .modal-subtitle {
   font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 .modal-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   display: block;
 }
 .modal-textarea {
   width: 100%;
-  min-height: 72px;
+  min-height: 64px;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-code);
+  border-radius: 6px;
+  background: var(--bg-body);
   color: var(--text-primary);
   font-family: var(--font-stack);
   font-size: 13px;
-  padding: 10px 12px;
+  padding: 9px 11px;
   resize: vertical;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  line-height: 1.5;
 }
 .modal-textarea:focus {
   outline: 2px solid var(--focus-ring);
@@ -1168,50 +1212,54 @@ body {
 .modal-radio-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 6px;
+  margin-bottom: 18px;
 }
 .modal-radio-label {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 7px 11px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
   transition: background 0.1s, border-color 0.15s;
 }
-.modal-radio-label:hover { background: var(--bg-hover); }
+.modal-radio-label:hover { background: var(--bg-hover); border-color: var(--text-muted); }
+.modal-radio-label:has(input:checked) { border-color: var(--text-muted); background: var(--bg-hover); }
 .modal-radio-label input[type="radio"] {
-  accent-color: var(--focus-ring);
-  width: 14px;
-  height: 14px;
+  accent-color: var(--text-primary);
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
 }
 .modal-radio-label .radio-desc {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   margin-left: auto;
 }
 .modal-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   justify-content: flex-end;
+  margin-top: 4px;
 }
 .modal-btn {
   font-family: var(--font-stack);
   font-size: 12px;
   font-weight: 600;
-  padding: 8px 20px;
+  padding: 6px 16px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--text-secondary);
+  letter-spacing: 0.01em;
 }
-.modal-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.modal-btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--text-muted); }
 .modal-btn.primary {
   background: var(--text-primary);
   color: var(--bg-card);
@@ -1223,23 +1271,23 @@ body {
 /* AI FIX LOADING MODAL */
 .ai-modal-content {
   text-align: center;
-  padding: 16px 0 8px;
+  padding: 12px 0 6px;
 }
 .ai-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--border);
-  border-top-color: var(--focus-ring);
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border);
+  border-top-color: var(--text-primary);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .ai-modal-status {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .ai-modal-detail {
   font-size: 12px;
@@ -1249,8 +1297,9 @@ body {
 .ai-modal-done.visible { display: block; }
 .ai-modal-loading.hidden { display: none; }
 .ai-done-icon {
-  font-size: 36px;
-  margin-bottom: 8px;
+  font-size: 28px;
+  margin-bottom: 6px;
+  color: var(--success);
 }
 
 /* RESOLUTION BANNER on cards */
@@ -1260,7 +1309,7 @@ body {
   gap: 6px;
   padding: 8px 12px;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1296,7 +1345,7 @@ body {
 }
 .sidebar-section-label {
   padding: 14px 14px 4px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1313,6 +1362,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  box-shadow: 0 1px 4px rgba(22,24,26,0.05), 0 0 1px rgba(22,24,26,0.03);
 }
 .passed-card .passed-icon {
   color: var(--success);
@@ -1328,15 +1378,28 @@ body {
   font-weight: 600;
 }
 .passed-card .passed-meta {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   margin-top: 2px;
 }
 .passed-card .passed-pkg {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
 }
+
+/* ALL-SECTION LABEL */
+.all-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  padding: 16px 4px 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.all-section-label:first-child { padding-top: 4px; }
 
 /* CELEBRATION */
 .celebration {
@@ -1358,9 +1421,9 @@ body {
   .summary-top { flex-direction: column; gap: 8px; }
 }
 h1.logo {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   margin: 0;
   line-height: inherit;
 }
@@ -1376,8 +1439,8 @@ h2.modal-title {
 .violation-card .instances-count {
   font-size: 12px;
   color: var(--text-muted);
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-weight: 400;
+  margin-bottom: 8px;
 }
 .violation-card .violation-instances {
   display: flex;
@@ -1395,9 +1458,8 @@ h2.modal-title {
 }
 .violation-card .violation-instance + .violation-instance { margin-top: 6px; }
 
-/* ── Resolved — green accent, no fade ── */
+/* ── Resolved — subtle, no border, no fade ── */
 .violation-card .violation-instance.resolved-instance {
-  border-left: 3px solid var(--success);
 }
 .violation-card .violation-instance.resolved-instance .instance-num {
   font-size: 0;
@@ -1406,19 +1468,18 @@ h2.modal-title {
 }
 .violation-card .violation-instance.resolved-instance .instance-num::after {
   content: '✓';
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--success);
 }
 .violation-card .violation-instance.resolved-instance .instance-resolution-label {
-  color: var(--success);
-  background: rgba(34,197,94,0.1);
+  color: var(--text-muted);
+  background: transparent;
 }
 .violation-card .violation-instance.resolved-instance .instance-more-info-toggle { display: none; }
 
-/* ── Skipped — amber accent, no fade ── */
+/* ── Skipped — no border, matches resolved style ── */
 .violation-card .violation-instance.skipped-instance {
-  border-left: 3px solid var(--moderate);
 }
 .violation-card .violation-instance.skipped-instance .instance-num {
   font-size: 0;
@@ -1435,8 +1496,8 @@ h2.modal-title {
   color: var(--text-muted);
 }
 .violation-card .violation-instance.skipped-instance .instance-resolution-label {
-  color: var(--moderate);
-  background: rgba(234,179,8,0.08);
+  color: var(--text-muted);
+  background: transparent;
 }
 .violation-card .violation-instance.skipped-instance .instance-more-info-toggle { display: none; }
 
@@ -1444,22 +1505,22 @@ h2.modal-title {
 .violation-card .instance-row-1 {
   display: flex;
   align-items: center;
-  padding: 10px 12px 6px;
-  gap: 8px;
+  padding: 8px 10px 5px;
+  gap: 7px;
 }
 .violation-card .instance-num {
   flex-shrink: 0;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--bg-hover);
-  border: 1px solid var(--border);
+  background: #3a3a3f;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
 }
 .violation-card .instance-code {
   font-family: var(--font-mono);
@@ -1498,7 +1559,7 @@ h2.modal-title {
 .violation-card .instance-row-2 {
   display: flex;
   align-items: center;
-  padding: 0 8px 10px;
+  padding: 4px 10px 8px;
   gap: 6px;
 }
 .violation-card .instance-more-info-toggle {
@@ -1508,7 +1569,7 @@ h2.modal-title {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
   padding: 3px 6px;
@@ -1519,7 +1580,7 @@ h2.modal-title {
 .violation-card .instance-more-info-toggle:hover { color: var(--text-primary); background: var(--bg-hover); }
 .violation-card .instance-more-info-toggle:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 .violation-card .instance-more-info-toggle .toggle-chevron {
-  font-size: 8px;
+  font-size: 12px;
   transition: transform 0.2s;
   display: inline-block;
 }
@@ -1534,10 +1595,10 @@ h2.modal-title {
 }
 .violation-card .instance-actions button {
   font-family: var(--font-stack);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 4px 11px;
-  border-radius: 5px;
+  padding: 3px 10px;
+  border-radius: 4px;
   cursor: pointer;
   border: 1px solid var(--border);
   background: transparent;
@@ -1557,15 +1618,15 @@ h2.modal-title {
 .violation-card .instance-actions .btn-instance-skip:hover { color: var(--text-primary); border-color: var(--border); }
 .violation-card .instance-actions .btn-instance-done { color: var(--text-primary); font-weight: 700; }
 .violation-card .instance-actions .btn-instance-undo { color: var(--text-secondary); }
-.violation-card .instance-actions .btn-instance-unskip { color: var(--serious); border-color: var(--serious); }
-.violation-card .instance-actions .btn-instance-unskip:hover { background: var(--serious); color: #000; }
+.violation-card .instance-actions .btn-instance-unskip { color: var(--text-secondary); }
+.violation-card .instance-actions .btn-instance-unskip:hover { border-color: var(--text-primary); color: var(--text-primary); }
 
 /* Inline resolution label */
 .violation-card .instance-resolution-label {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1602,7 +1663,7 @@ h2.modal-title {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   background: var(--bg-body);
 }
@@ -1627,15 +1688,15 @@ h2.modal-title {
 /* Fix any of section */
 .violation-card .card-fix-options {
   margin: 0 0 14px;
-  padding: 10px 14px;
+  padding: 8px 10px 12px;
   background: transparent;
   border: none;
 }
 .violation-card .card-fix-options-heading {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
   margin-bottom: 6px;
 }
@@ -1648,7 +1709,7 @@ h2.modal-title {
   gap: 3px;
 }
 .violation-card .card-fix-options ul li {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--text-secondary);
   display: flex;
   align-items: baseline;
@@ -1664,7 +1725,7 @@ h2.modal-title {
 }
 .violation-card .card-fix-options ul li code {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   background: var(--bg-hover);
   border: 1px solid var(--border);
   border-radius: 3px;
@@ -1678,6 +1739,55 @@ h2.modal-title {
 .violation-card.v-collapsed .card-fix-options {
   display: none;
 }
+/* Modal required asterisk */
+.modal-required {
+  color: var(--critical);
+  font-weight: 600;
+  margin-left: 1px;
+}
+
+/* Modal scope tooltip */
+.modal-tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: help;
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+}
+.modal-tooltip-trigger:hover .modal-tooltip-box,
+.modal-tooltip-trigger:focus .modal-tooltip-box {
+  display: block;
+}
+.modal-tooltip-box {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 230px;
+  background: var(--text-primary);
+  color: var(--bg-card);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 8px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: normal;
+  pointer-events: none;
+  z-index: 200;
+}
+.modal-tooltip-box strong { font-weight: 600; }
+
 /* Footer always visible — collapsed cards show fix-all + learn more */
 .violation-card.v-collapsed .card-footer {
   border-top: none;
@@ -1692,20 +1802,18 @@ h2.modal-title {
 <div class="modal-overlay" id="skipModal" role="dialog" aria-modal="true" aria-labelledby="skipModalTitle">
   <div class="modal-box">
     <h2 class="modal-title" id="skipModalTitle">Ignore this violation</h2>
-    <div class="modal-subtitle" id="skipModalRule"></div>
-    <label class="modal-label">Reason</label>
+    <div id="skipModalRule" style="display:none"></div>
+    <label class="modal-label">Reason <span class="modal-required">*</span></label>
     <textarea class="modal-textarea" id="skipReason" placeholder="Why are you ignoring this violation?"></textarea>
-    <label class="modal-label">Scope</label>
+    <label class="modal-label">Scope <span class="modal-required">*</span><span class="modal-tooltip-trigger" tabindex="0" aria-label="Scope info: 'This PR only' will reappear on the next scan. 'Forever' adds it to your permanent ignore list and it won't be flagged again.">?<span class="modal-tooltip-box">Choose how long to ignore this violation.<br><br><strong>This PR only</strong> — will reappear on the next scan.<br><strong>Forever</strong> — adds to permanent ignore list and won't be flagged again.</span></span></label>
     <div class="modal-radio-group">
       <label class="modal-radio-label">
         <input type="radio" name="skipScope" value="this-pr" checked>
         Ignore for this PR only
-        <span class="radio-desc">Will reappear next scan</span>
       </label>
       <label class="modal-radio-label">
         <input type="radio" name="skipScope" value="forever">
         Ignore forever
-        <span class="radio-desc">Add to permanent ignore list</span>
       </label>
     </div>
     <div class="modal-actions">
@@ -1741,7 +1849,12 @@ h2.modal-title {
 <!-- TOP BAR -->
 <header class="top-bar" role="banner">
   <div class="top-bar-brand">
-    <h1 class="logo">ELEVEN</h1>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0;opacity:0.85">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4 8.5c0-1.33 2.67-2 4-2s4 .67 4 2V17H8v-1.5z"/>
+      </svg>
+      <h1 class="logo">ELEVEN</h1>
+    </div>
     <span class="subtitle">PR #1247</span>
   </div>
   <button class="dark-mode-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
@@ -1770,9 +1883,9 @@ h2.modal-title {
       <span id="stat-serious" style="display:none">11</span>
     </div>
     <div class="summary-filters" role="group" aria-label="Audit filters">
-      <button class="filter-tab filter-tab--failed active" data-filter="failed" aria-pressed="true"><span class="count" id="count-failed">9</span><span class="label">Violated Inspections</span></button>
-      <button class="filter-tab filter-tab--pre-existing" data-filter="pre-existing" aria-pressed="false"><span class="count" id="count-pre-existing">13</span><span class="label">Pre-existing <span class="filter-tooltip-trigger" title="Pre-existing violations were found on your first scan. They are non-blocking and won't fail your PR, but should be resolved within 60 days." aria-label="Info about pre-existing violations">&#63;</span></span></button>
-      <button class="filter-tab filter-tab--passed" data-filter="passed" aria-pressed="false"><span class="count" id="count-passed">38</span><span class="label">Passed Inspections</span></button>
+      <button class="filter-tab filter-tab--failed active" data-filter="failed" aria-pressed="true"><span class="count" id="count-failed">9</span><span class="label">Failed Components</span></button>
+      <button class="filter-tab filter-tab--pre-existing" data-filter="pre-existing" aria-pressed="false"><span class="count" id="count-pre-existing">13</span><span class="label">Pre-existing <span class="filter-tooltip-trigger" tabindex="0" aria-label="Info about pre-existing violations">?<span class="filter-tooltip-box">Pre-existing violations were found on your first scan. They are non-blocking and won't fail your PR, but should be resolved within 60 days.</span></span></span></button>
+      <button class="filter-tab filter-tab--passed" data-filter="passed" aria-pressed="false"><span class="count" id="count-passed">38</span><span class="label">Passed Components</span></button>
       <button class="filter-tab" data-filter="all" aria-pressed="false"><span class="count" id="count-total">43</span><span class="label">Total Components</span></button>
     </div>
   </div>
@@ -1931,6 +2044,7 @@ h2.modal-title {
   let activePackage = 'all'; // 'all' or a specific package name
   let activeRuleGroup = null; // null = show all
   var lastResolvedKey = null; // Track which violation was just resolved for auto-expand
+  var lastSkipKey = null; // Track which violation was just skipped — always keep card open
   var pendingScrollTarget = null; // passed component name to scroll to after render
   // Track per-violation state: 'active', 'skipped', 'resolved'
   const violationState = {};
@@ -1990,7 +2104,7 @@ h2.modal-title {
         const key = rg.id + '-' + i;
         const vs = violationState[key];
         if (activeFilter === 'passed') return; // passed audits have no violations to show
-        if (activeFilter === 'failed' && vs.state === 'skipped') return; // failed audits: show only non-skipped violations
+        // skipped violations remain visible in 'failed' view (amber indicator, same pattern as resolved)
         if (activeFilter === 'pre-existing' && v.status !== 'pre-existing') return;
         if (activeFilter === 'skipped' && vs.state !== 'skipped') return;
         if (activeFilter === 'all' && vs.state === 'skipped') {
@@ -2076,22 +2190,20 @@ h2.modal-title {
   function renderSidebar() {
     var listEl = document.getElementById('ruleGroupsList');
     listEl.innerHTML = '';
+    listEl.setAttribute('data-filter-mode', activeFilter);
     var totalComponents = ruleGroups.length + passedComponents.length;
     var titleEl = document.getElementById('sidebarTitle');
 
-    if (activeFilter === 'all') {
-      titleEl.textContent = 'Packages (' + totalComponents + ' components)';
-    } else if (activeFilter === 'failed') {
-      titleEl.textContent = 'Packages (' + ruleGroups.length + ')';
-    } else if (activeFilter === 'pre-existing') {
-      var preExistingGroups = ruleGroups.filter(function(rg) { return rg.violations.some(function(v) { return v.status === 'pre-existing'; }); });
-      titleEl.textContent = 'Pre-existing (' + preExistingGroups.length + ')';
-    } else if (activeFilter === 'passed') {
-      titleEl.textContent = 'Passed Inspections (' + passedComponents.length + ')';
-    } else if (activeFilter === 'skipped') {
+    // Handle skipped early (no pkgTree needed)
+    if (activeFilter === 'skipped') {
       var skippedGroups = getSkippedRuleGroups();
-      titleEl.textContent = 'Skipped (' + skippedGroups.length + ')';
+      // Count packages for skipped
+      var skippedPkgs = {};
+      skippedGroups.forEach(function(rg) { rg.violations.forEach(function(v) { skippedPkgs[v.pkg] = true; }); });
+      var skippedPkgCount = Object.keys(skippedPkgs).length;
+      titleEl.textContent = skippedPkgCount + ' package' + (skippedPkgCount !== 1 ? 's' : '') + ' · ' + skippedGroups.length + ' component' + (skippedGroups.length !== 1 ? 's' : '');
       if (skippedGroups.length === 0) {
+        titleEl.textContent = 'No ignored violations yet';
         var emptyMsg = document.createElement('div');
         emptyMsg.className = 'sidebar-section-label';
         emptyMsg.style.cssText = 'padding: 20px 14px; font-size: 12px;';
@@ -2110,6 +2222,25 @@ h2.modal-title {
       if (!aHasViolations && bHasViolations) return 1;
       return a.localeCompare(b);
     });
+
+    // Count components per filter
+    var pkgCount = sortedPkgs.filter(function(p) {
+      var pkg = pkgTree[p];
+      return pkg.violated.length + pkg.preExisting.length + pkg.passed.length > 0;
+    }).length;
+    var compCount;
+    if (activeFilter === 'all') {
+      compCount = ruleGroups.length + passedComponents.length;
+    } else if (activeFilter === 'failed') {
+      compCount = ruleGroups.length;
+    } else if (activeFilter === 'pre-existing') {
+      compCount = ruleGroups.filter(function(rg) { return rg.violations.some(function(v) { return v.status === 'pre-existing'; }); }).length;
+    } else if (activeFilter === 'passed') {
+      compCount = passedComponents.length;
+    } else {
+      compCount = 0;
+    }
+    titleEl.textContent = pkgCount + ' package' + (pkgCount !== 1 ? 's' : '') + ' · ' + compCount + ' component' + (compCount !== 1 ? 's' : '');
 
     var firstPkgWithViolations = true;
     sortedPkgs.forEach(function(pkgName) {
@@ -2284,7 +2415,7 @@ h2.modal-title {
 
     // Passed filter
     if (activeFilter === 'passed') {
-      titleEl.textContent = 'Passed Inspections';
+      titleEl.textContent = 'Passed Components';
       countEl.textContent = passedComponents.length + ' items';
       passedComponents.forEach(function(pc) {
         var card = document.createElement('div');
@@ -2323,10 +2454,10 @@ h2.modal-title {
         var key = rg.id + '-' + i;
         var vs = violationState[key];
         // Apply filters
-        if (activeFilter === 'failed' && (v.status === 'pre-existing' || vs.state === 'skipped')) return;
+        if (activeFilter === 'failed' && v.status === 'pre-existing') return;
+        if (activeFilter === 'all' && v.status === 'pre-existing') return; // pre-existing rendered separately below
         if (activeFilter === 'pre-existing' && v.status !== 'pre-existing') return;
         if (activeFilter === 'skipped' && vs.state !== 'skipped') return;
-        if (activeFilter === 'all') { /* show everything */ }
         if (activeSeverity !== 'all' && v.severity !== activeSeverity) return;
         if (activePackage !== 'all' && v.pkg !== activePackage) return;
         instances.push({ v: v, key: key, vs: vs, idx: i });
@@ -2341,18 +2472,27 @@ h2.modal-title {
       var theRg = ruleGroups.find(function(r) { return r.id === activeRuleGroup; });
       titleEl.textContent = theRg ? theRg.description : 'Violations';
     } else if (activeFilter === 'failed') {
-      titleEl.textContent = 'Violated Inspections';
+      titleEl.textContent = 'Failed Components';
     } else if (activeFilter === 'pre-existing') {
       titleEl.textContent = 'Pre-existing';
     } else if (activeFilter === 'skipped') {
       titleEl.textContent = 'Skipped';
     } else {
-      titleEl.textContent = 'All Violations';
+      titleEl.textContent = 'All Components';
     }
 
     var totalInstances = 0;
     visibleGroups.forEach(function(g) { totalInstances += g.instances.length; });
-    countEl.textContent = totalInstances + ' element' + (totalInstances !== 1 ? 's' : '') + ' in ' + visibleGroups.length + ' rule' + (visibleGroups.length !== 1 ? 's' : '');
+    if (activeFilter === 'all') {
+      // Count pre-existing groups too
+      var preExistingGroupCount = ruleGroups.filter(function(rg) {
+        return rg.violations.some(function(v) { return v.status === 'pre-existing'; });
+      }).length;
+      var totalComps = visibleGroups.length + preExistingGroupCount + passedComponents.length;
+      countEl.textContent = totalComps + ' component' + (totalComps !== 1 ? 's' : '');
+    } else {
+      countEl.textContent = totalInstances + ' element' + (totalInstances !== 1 ? 's' : '') + ' in ' + visibleGroups.length + ' rule' + (visibleGroups.length !== 1 ? 's' : '');
+    }
 
     // Render each rule group as a card
     visibleGroups.forEach(function(group, gIdx) {
@@ -2379,7 +2519,7 @@ h2.modal-title {
       card.setAttribute('data-rg', rg.id);
 
       // Status tags
-      var statusTags = '<span class="status-tag">' + instances.length + ' element' + (instances.length !== 1 ? 's' : '') + '</span>';
+      var statusTags = '<span style="font-size:12px;color:var(--text-muted);font-weight:400;">' + instances.length + ' element' + (instances.length !== 1 ? 's' : '') + '</span>';
 
       // Build instances HTML
       var instancesHtml = '';
@@ -2391,16 +2531,15 @@ h2.modal-title {
         // Build row-2 actions / status
         var row2Actions = '';
         if (isSkipped) {
-          var skipLabel = inst.vs.skipScope === 'forever' ? 'Skipped forever' : 'Skipped for PR';
+          var skipLabel = inst.vs.skipScope === 'forever' ? 'Ignored forever' : 'Ignored for PR';
           row2Actions =
-            '<div class="instance-resolution-label">&#8856; ' + skipLabel + '</div>' +
-            '<button class="btn-instance-unskip" data-key="' + inst.key + '">UNSKIP</button>';
+            '<div class="instance-resolution-label">' + skipLabel + '</div>' +
+            '<button class="btn-instance-unskip" data-key="' + inst.key + '">UNDO</button>';
         } else if (isResolved) {
-          var starSvg = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-right:3px;vertical-align:-1px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
-          var resolvedLabel = inst.vs.resolvedBy === 'ai' ? starSvg + 'Fixed by AI' : '&#10003; Fixed manually';
+          var resolvedLabel = inst.vs.resolvedBy === 'ai' ? 'Fixed by AI' : 'Fixed manually';
           row2Actions =
             '<div class="instance-resolution-label">' + resolvedLabel + '</div>' +
-            '<button class="btn-instance-undo" data-key="' + inst.key + '">UNDO</button>';
+            (inst.vs.resolvedBy !== 'ai' ? '<button class="btn-instance-undo" data-key="' + inst.key + '">UNDO</button>' : '');
         } else {
           row2Actions =
             '<button class="btn-instance-fix" data-key="' + inst.key + '">FIX WITH AI</button>' +
@@ -2433,7 +2572,6 @@ h2.modal-title {
         '<div class="card-top-row">' +
           '<div class="card-top-left">' +
             '<span class="severity-badge ' + highestSev + '">' +
-              '<span class="severity-icon">' + severityIcon(highestSev) + '</span> ' +
               highestSev.toUpperCase() +
             '</span>' +
             statusTags +
@@ -2441,7 +2579,6 @@ h2.modal-title {
           '<span class="card-chevron">&#9662;</span>' +
         '</div>' +
         '<div class="card-rule-name">' + escapeHtml(rg.description) + '</div>' +
-        '<div class="instances-count">' + instances.length + ' element' + (instances.length !== 1 ? 's' : '') + '</div>' +
         '<div class="violation-instances">' + instancesHtml + '</div>' +
         (rg.fixOptions && rg.fixOptions.length ?
           '<div class="card-fix-options">' +
@@ -2454,6 +2591,88 @@ h2.modal-title {
 
       listEl.appendChild(card);
     });
+
+    // ---- All Components: append pre-existing section ----
+    if (activeFilter === 'all') {
+      // Collect pre-existing groups
+      var preExistingGroups = [];
+      ruleGroups.forEach(function(rg) {
+        var instances = [];
+        rg.violations.forEach(function(v, i) {
+          if (v.status !== 'pre-existing') return;
+          var key = rg.id + '-' + i;
+          var vs = violationState[key];
+          instances.push({ v: v, key: key, vs: vs, idx: i });
+        });
+        if (instances.length > 0) preExistingGroups.push({ rg: rg, instances: instances });
+      });
+
+      if (preExistingGroups.length > 0) {
+
+        preExistingGroups.forEach(function(group) {
+          var rg = group.rg;
+          var instances = group.instances;
+          var severityOrder = { critical: 0, serious: 1, moderate: 2 };
+          var highestSev = 'moderate';
+          instances.forEach(function(inst) {
+            if (severityOrder[inst.v.severity] < severityOrder[highestSev]) highestSev = inst.v.severity;
+          });
+          var allResolved = instances.every(function(inst) { return inst.vs.state === 'resolved'; });
+          var allSkipped = instances.every(function(inst) { return inst.vs.state === 'skipped'; });
+          var statusTags = '<span style="font-size:12px;color:var(--text-muted);font-weight:400;">' + instances.length + ' element' + (instances.length !== 1 ? 's' : '') + '</span>';
+          var instancesHtml = '';
+          instances.forEach(function(inst, iIdx) {
+            var isResolved = inst.vs.state === 'resolved';
+            var isSkipped = inst.vs.state === 'skipped';
+            var instanceClass = 'violation-instance' + (isResolved ? ' resolved-instance' : '') + (isSkipped ? ' skipped-instance' : '');
+            var row2Actions = '';
+            if (isSkipped) {
+              var skipLabel = inst.vs.skipScope === 'forever' ? 'Ignored forever' : 'Ignored for PR';
+              row2Actions = '<div class="instance-resolution-label">' + skipLabel + '</div><button class="btn-instance-unskip" data-key="' + inst.key + '">UNDO</button>';
+            } else if (isResolved) {
+              var resolvedLabel = inst.vs.resolvedBy === 'ai' ? 'Fixed by AI' : 'Fixed manually';
+              row2Actions = '<div class="instance-resolution-label">' + resolvedLabel + '</div>' + (inst.vs.resolvedBy !== 'ai' ? '<button class="btn-instance-undo" data-key="' + inst.key + '">UNDO</button>' : '');
+            } else {
+              row2Actions = '<button class="btn-instance-fix" data-key="' + inst.key + '">FIX WITH AI</button><button class="btn-instance-skip" data-key="' + inst.key + '">IGNORE</button>';
+            }
+            var copySvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            instancesHtml +=
+              '<div class="' + instanceClass + '" data-key="' + inst.key + '">' +
+                '<div class="instance-row-1"><span class="instance-num">' + (iIdx + 1) + '</span><code class="instance-code">' + escapeHtml(inst.v.selector) + '</code><button class="btn-copy-selector" type="button" title="Copy selector" aria-label="Copy selector" data-copy="' + escapeHtml(inst.v.selector) + '">' + copySvg + '</button></div>' +
+                '<div class="instance-row-2"><button class="instance-more-info-toggle" type="button" aria-expanded="false" onclick="var t=this;t.classList.toggle(\'open\');t.closest(\'.violation-instance\').querySelector(\'.instance-more-info\').classList.toggle(\'open\');t.setAttribute(\'aria-expanded\',t.classList.contains(\'open\'))"><span class="toggle-chevron">&#9654;</span> More info</button><div class="instance-actions">' + row2Actions + '</div></div>' +
+                '<div class="instance-more-info"><div class="info-screenshot"><span class="info-screenshot-icon">&#128247;</span>Element screenshot</div>' + (inst.v.elementHtml ? '<pre class="info-html-block">' + escapeHtml(inst.v.elementHtml) + '</pre>' : '') + '</div>' +
+              '</div>';
+          });
+          var card = document.createElement('div');
+          card.className = 'violation-card' + (allResolved ? ' resolved' : '') + (allSkipped ? ' skipped' : '');
+          card.setAttribute('data-rg', rg.id);
+          card.innerHTML =
+            '<div class="card-top-row">' +
+              '<div class="card-top-left"><span class="severity-badge ' + highestSev + '">' + highestSev.toUpperCase() + '</span>' + statusTags + '</div>' +
+              '<span class="card-chevron">&#9662;</span>' +
+            '</div>' +
+            '<div class="card-rule-name">' + escapeHtml(rg.description) + '</div>' +
+            '<div class="violation-instances">' + instancesHtml + '</div>' +
+            (rg.fixOptions && rg.fixOptions.length ? '<div class="card-fix-options"><div class="card-fix-options-heading">Fix any of:</div><ul>' + rg.fixOptions.map(function(opt) { return '<li>' + opt + '</li>'; }).join('') + '</ul></div>' : '') +
+            '<div class="card-footer"><a class="card-learn-more" href="' + rg.wcagUrl + '" target="_blank" rel="noopener">Learn more &#8599;</a></div>';
+          listEl.appendChild(card);
+        });
+      }
+
+      // ---- All Components: append passed section ----
+      if (passedComponents.length > 0) {
+        passedComponents.forEach(function(pc) {
+          var card = document.createElement('div');
+          card.className = 'passed-card';
+          card.setAttribute('data-pc-name', pc.name);
+          card.innerHTML =
+            '<span class="passed-icon">&#10003;</span>' +
+            '<div class="passed-info"><div class="passed-name">' + pc.name + '</div></div>' +
+            '<span class="passed-pkg">' + pc.pkg + '</span>';
+          listEl.appendChild(card);
+        });
+      }
+    }
 
     // Collapse logic — first non-resolved card is open
     var allCards = listEl.querySelectorAll('.violation-card');
@@ -2496,6 +2715,18 @@ h2.modal-title {
       lastResolvedKey = null;
     }
 
+    // Skip action: always keep the card open, never navigate away
+    if (lastSkipKey) {
+      var skippedCardIdx = -1;
+      allCards.forEach(function(c, idx) {
+        c.querySelectorAll('.violation-instance').forEach(function(inst) {
+          if (inst.getAttribute('data-key') === lastSkipKey) skippedCardIdx = idx;
+        });
+      });
+      if (skippedCardIdx >= 0) autoExpandedIndex = skippedCardIdx;
+      lastSkipKey = null;
+    }
+
     allCards.forEach(function(card, i) {
       if (autoExpandedIndex >= 0) {
         // After a resolution: keep the target card open, collapse the rest
@@ -2512,11 +2743,6 @@ h2.modal-title {
       if (topRow) {
         topRow.setAttribute('role', 'button');
         topRow.setAttribute('tabindex', '0');
-        topRow.addEventListener('click', function(e) {
-          if (e.target.closest('button') || e.target.closest('a')) return;
-          card.classList.toggle('v-collapsed');
-          card.setAttribute('aria-expanded', card.classList.contains('v-collapsed') ? 'false' : 'true');
-        });
         topRow.addEventListener('keydown', function(e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -2525,6 +2751,16 @@ h2.modal-title {
           }
         });
       }
+      // Clicking anywhere on a collapsed card expands it;
+      // clicking the top-row on an expanded card collapses it.
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('button') || e.target.closest('a')) return;
+        var isCollapsed = card.classList.contains('v-collapsed');
+        if (isCollapsed || e.target.closest('.card-top-row')) {
+          card.classList.toggle('v-collapsed');
+          card.setAttribute('aria-expanded', card.classList.contains('v-collapsed') ? 'false' : 'true');
+        }
+      });
     });
 
     if (autoExpandedIndex >= 0 && allCards[autoExpandedIndex]) {
@@ -2597,18 +2833,18 @@ h2.modal-title {
       }, 2500);
     }
 
-    document.getElementById('skipModalCancel').addEventListener('click', closeSkipModal);
-    document.getElementById('skipModalConfirm').addEventListener('click', function() {
+    document.getElementById('skipModalCancel').onclick = closeSkipModal;
+    document.getElementById('skipModalConfirm').onclick = function() {
       if (pendingSkipKey) {
         var scope = document.querySelector('input[name="skipScope"]:checked').value;
         violationState[pendingSkipKey].state = 'skipped';
         violationState[pendingSkipKey].skipReason = skipReason.value;
         violationState[pendingSkipKey].skipScope = scope;
-        lastResolvedKey = pendingSkipKey;
+        lastSkipKey = pendingSkipKey;
       }
       closeSkipModal();
       render();
-    });
+    };
 
     // Instance-level button handlers
     listEl.querySelectorAll('.btn-instance-done').forEach(function(btn) {
